@@ -48,7 +48,7 @@ This project is a **full-stack AI-powered brain cancer classification system**. 
 
 ** Run the Jupyer Notebook in ModelTraining as the Flask application relies on this -- for sake of space in github I have ommitted the folder but you can easily create it on your own **
 
-### **1️⃣ Local Development**
+### ** Local Development**
 #### **Backend (Flask API)**
 
 ```bash
@@ -68,7 +68,7 @@ npm start
 ```
 - Runs on `http://localhost:3000`
 
-### **2️⃣ Docker Setup**
+### **Docker Setup**
 #### **Build & Run Flask API**
 ```bash
 cd Infra/docker/flask
@@ -81,7 +81,7 @@ cd Infra/docker/react
 docker-compose up --build -d
 ```
 
-### **3️⃣ Deploy to AWS (Terraform & Systems Manager)**
+### ** Deploy to AWS (Terraform & Systems Manager)**
 #### **Provision Infrastructure**
 ```bash
 cd Infra/terraform
