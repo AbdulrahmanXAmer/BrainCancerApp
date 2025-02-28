@@ -1,0 +1,31 @@
+name: Deploy to AWS (Demo Only)
+
+on:
+  workflow_dispatch: # This allows manual triggering for demo purposes
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v3
+
+      - name: Install AWS CLI
+        run: sudo apt-get install -y awscli
+
+      - name: SSH into Flask Server and Deploy
+        run: |
+          aws ssm send-command \
+            --document-name "AWS-RunShellScript" \
+            --targets "Key=instance-id,Values=${{ secrets.FLASK_INSTANCE_ID }}" \
+            --parameters 'commands=["cd /home/ubuntu/app && git pull && docker-compose up -d"]' \
+            --region us-east-1
+
+      - name: SSH into React Server and Deploy
+        run: |
+          aws ssm send-command \
+            --document-name "AWS-RunShellScript" \
+            --targets "Key=instance-id,Values=${{ secrets.REACT_INSTANCE_ID }}" \
+            --parameters 'commands=["cd /home/ubuntu/ui && git pull && docker-compose up -d && systemctl restart nginx"]' \
+            --region us-east-1
